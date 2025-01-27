@@ -22,14 +22,24 @@ class Fixed
 		// ####################//
 		// Operator Overload
 		Fixed&					operator=(const Fixed& obj);
-		friend std::ostream&	operator<<(std::ostream& os, const Fixed& obj);
-		friend bool				operator>(const Fixed &l, const Fixed &r);
-		friend bool				operator<(const Fixed& l, const Fixed& r);
-		friend bool				operator>=(const Fixed &l, const Fixed &r);
-		friend bool				operator<=(const Fixed &l, const Fixed &r);
-		friend bool				operator==(const Fixed &l, const Fixed &r);
-		friend bool				operator!=(const Fixed &l, const Fixed &r);
-		friend Fixed			operator+(const Fixed &l, const Fixed &r);
+		friend std::ostream&	operator<<(std::ostream& os, const Fixed& obj); // Require friend keyword because its using output stream which does not belong to Fixed class 
+		// Comparison operators
+		bool					operator>(const Fixed &r);
+		bool					operator<(const Fixed& r);
+		bool					operator>=(const Fixed &r);
+		bool					operator<=(const Fixed &r);
+		bool					operator==(const Fixed &r);
+		bool					operator!=(const Fixed &r);
+		// Arithmectic operators
+		Fixed					operator+(const Fixed &r);
+		Fixed					operator-(const Fixed &r);
+		Fixed					operator*(const Fixed &r);
+		Fixed					operator/(const Fixed &r);
+		// Increment & Decrement operators
+		Fixed&					operator++(void); // Pre-increment
+		Fixed					operator++(int); // Post-increment
+		Fixed&					operator--(void); // Pre-decrement
+		Fixed					operator--(int); // Post-increment
 
 		// ####################//
 		// Methodes

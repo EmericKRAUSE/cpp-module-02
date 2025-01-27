@@ -46,40 +46,88 @@ std::ostream& operator<<(std::ostream& os, const Fixed& obj)
 	return (os);
 }
 
-bool operator>(const Fixed &l, const Fixed &r)
+// Comparison operators
+bool Fixed::operator>(const Fixed &r)
 {
-	return (l.getRawBits() > r.getRawBits());
+	return (this->toFloat() > r.toFloat());
 }
 
-bool operator<(const Fixed& l, const Fixed& r)
+bool Fixed::operator<(const Fixed& r)
 {
-	return (l.getRawBits() < r.getRawBits());
+	return (this->toFloat() < r.toFloat());
 }
 
-bool operator>=(const Fixed &l, const Fixed &r)
+bool Fixed::operator>=(const Fixed& r)
 {
-	return (l.getRawBits() >= r.getRawBits());
+	return (this->toFloat() >= r.toFloat());
 }
 
-bool operator<=(const Fixed &l, const Fixed &r)
+bool Fixed::operator<=(const Fixed& r)
 {
-	return (l.getRawBits() <= r.getRawBits());
+	return (this->toFloat() <= r.toFloat());
 }
 
-bool operator==(const Fixed &l, const Fixed &r)
+bool Fixed::operator==(const Fixed& r)
 {
-	return (l.getRawBits() == r.getRawBits());
+	return (this->toFloat() == r.toFloat());
 }
 
-bool operator!=(const Fixed &l, const Fixed &r)
+bool Fixed::operator!=(const Fixed& r)
 {
-	return (l.getRawBits() != r.getRawBits());
+	return (this->toFloat() != r.toFloat());
 }
 
-Fixed operator+(const Fixed &l, const Fixed &r)
+// Arithmectic operators
+Fixed Fixed::operator+(const Fixed& r)
 {
-	
-	return (l.getRawBits() + r.getRawBits());
+	return (Fixed(this->toFloat() + r.toFloat()));
+}
+
+Fixed Fixed::operator-(const Fixed& r)
+{
+	return (Fixed(this->toFloat() - r.toFloat()));
+}
+
+Fixed Fixed::operator*(const Fixed& r)
+{
+	return (Fixed(this->toFloat() * r.toFloat()));
+}
+
+Fixed Fixed::operator/( const Fixed& r)
+{
+	if (r.toFloat() == 0)
+	{
+		std::cerr << "Warning: division by 0" << std::endl;
+		return (Fixed(0));
+	}
+	return (Fixed(this->toFloat() / r.toFloat()));
+}
+
+// Increment & Decrement operators
+Fixed& Fixed::operator++(void)
+{
+	this->setRawBits(this->getRawBits() + 1);
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp(*this);
+	this->setRawBits(this->getRawBits() + 1);
+	return (temp);
+}
+
+Fixed &Fixed::operator--(void)
+{
+	this->setRawBits(this->getRawBits() - 1);
+	return (*this);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp(*this);
+	this->setRawBits(this->getRawBits() - 1);
+	return (temp);
 }
 
 // ####################//

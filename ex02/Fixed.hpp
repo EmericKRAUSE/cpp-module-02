@@ -22,7 +22,6 @@ class Fixed
 		// ####################//
 		// Operator Overload
 		Fixed&					operator=(const Fixed& obj);
-		friend std::ostream&	operator<<(std::ostream& os, const Fixed& obj); // Require friend keyword because its using output stream which does not belong to Fixed class 
 		// Comparison operators
 		bool					operator>(const Fixed &r);
 		bool					operator<(const Fixed& r);
@@ -53,5 +52,7 @@ class Fixed
 		static const Fixed&	max(const Fixed& a, const Fixed& b); // Overloading max function
 
 };
+
+std::ostream &operator<<(std::ostream &os, const Fixed &obj);
 
 #endif

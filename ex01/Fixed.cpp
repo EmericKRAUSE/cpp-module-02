@@ -9,13 +9,31 @@ Fixed::Fixed() : _fpNumber(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const entier) : _fpNumber(entier * (1 << _fractionBits))
+Fixed::Fixed(int const entier) : _fpNumber(0)
 {
+	int	scale = 1 << _fractionBits;
+
+	if (entier > INT32_MAX / scale || entier < INT32_MIN / scale)
+	{
+		std::cout << "Error: " << entier << " is too big to fit in a int" << std::endl;
+		return ;
+	}
+		
+	this->_fpNumber = entier * scale;
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(float const flottant) : _fpNumber(roundf(flottant * (1 << _fractionBits)))
+Fixed::Fixed(float const flottant) : _fpNumber(0)
 {
+
+	int scale = 1 << _fractionBits;
+
+	if (flottant > __FLT_MAX__ / scale || flottant < __FLT_MIN__ / scale)
+	{
+		std::cout << "Error: " << flottant << " is too big to fit in a float" << std::endl;
+		return;
+	}
+	this->_fpNumber = roundf(flottant * (1 << _fractionBits));
 	std::cout << "Float constructor called" << std::endl;
 }
 
